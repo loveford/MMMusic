@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface iPodMusicListViewController : UITableViewController<UITableViewDelegate,UITableViewDataSource>{
+@interface iPodMusicListViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>{
     UITableView *iPodMusicListTableView;
     NSMutableArray *iPodMusictableViewItems;
 }

@@ -17,18 +17,6 @@
 
 //方法类型：系统方法
 //编   写：
-//方法功能：
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
-//方法类型：系统方法
-//编   写：
 //方法功能：初始化UITableView
 - (void)viewDidLoad
 {

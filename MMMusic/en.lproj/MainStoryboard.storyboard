@@ -545,7 +545,7 @@
                 <relationship kind="outlet" name="delegate"/>
             </relationships>
         </class>
-        <class className="iPodMusicListViewController" superclassName="UITableViewController">
+        <class className="iPodMusicListViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/iPodMusicListViewController.h"/>
         </class>
         <class className="iPodPlayerViewController" superclassName="UITableViewController">

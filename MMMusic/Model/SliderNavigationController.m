@@ -9,16 +9,20 @@
 #import "SliderNavigationController.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface SliderNavigationController ()
+@interface SliderNavigationController ()<UIGestureRecognizerDelegate,UITableViewDelegate>
+{
+    BOOL _scrollViewDragging;
+}
 @property (retain, nonatomic) UIImageView *topImageView;
 @property (retain, nonatomic) UIView*backgroudView;
 @property (retain, nonatomic) NSMutableArray*imageArray;
 @property (retain, nonatomic) UIView*currentView;
 @property (assign, nonatomic) float lastInstance;
+@property (nonatomic, assign) id tableViewDelegate;
 @end
 
 @implementation SliderNavigationController
-@synthesize topImageView = _topImageView, backgroudView = _backgroudView, imageArray = _imageArray,currentView = _currentView,lastInstance = _lastInstance;
+@synthesize topImageView = _topImageView, backgroudView = _backgroudView, imageArray = _imageArray,currentView = _currentView,lastInstance = _lastInstance,tableViewDelegate = _tableViewDelegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -179,30 +183,62 @@
     }
     self.currentView = view;
     UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handelPan:)];
+    panGesture.delegate = self;
+    
+    if ([view isKindOfClass:[UITableView class]]) {
+        for (UIGestureRecognizer*ges in self.currentView.gestureRecognizers)
+        {
+            NSLog(@"ges info = %@",[ges class]);
+//            优先相应view的滑动
+            if ([NSStringFromClass([ges class]) isEqualToString:@"UISwipeGestureRecognizer"])
+            {
+                [ges requireGestureRecognizerToFail:panGesture];
+            }
+            
+        }
+
+    }
     [self.currentView addGestureRecognizer:panGesture];
     [panGesture release];
 }
+
 
 
 #pragma mark -UIPanGestureRecognizer Selector
 -(void)handelPan:(UIPanGestureRecognizer*)gestureRecognizer{
     if (gestureRecognizer.state == UIGestureRecognizerStateBegan)
     {
+        NSLog(@"began");
         self.lastInstance = 0.0;
+        if ([self.currentView isKindOfClass:[UITableView class]]) {
+            self.tableViewDelegate = [(UITableView *)self.currentView delegate];
+            [(UITableView *)self.currentView setDelegate:self];
+        }
     }
     else if (gestureRecognizer.state == UIGestureRecognizerStateChanged)
     {
         CGFloat xOffSet = [gestureRecognizer translationInView:self.currentView].x;
         CGFloat translateX = xOffSet -  self.lastInstance;
         self.lastInstance = xOffSet;
-        [self slideView:translateX];
+        if (!_scrollViewDragging) {
+            [self slideView:translateX];
+//            if ([self.currentView isKindOfClass:[UITableView class]]) {
+//                [(UITableView *)self.currentView setScrollEnabled:NO];
+//            }
+        }
         
+        NSLog(@"Move");
     }
     else if (gestureRecognizer.state == UIGestureRecognizerStateEnded)
     {
+        NSLog(@"end");
+        _scrollViewDragging = NO;
         [self slideAnimationView];
         self.lastInstance = 0.0;
-        
+        if ([self.currentView isKindOfClass:[UITableView class]]) {
+            [(UITableView *)self.currentView setDelegate:self.tableViewDelegate];
+//            [(UITableView *)self.currentView setScrollEnabled:YES];
+        }
     }
 }
 
@@ -335,4 +371,18 @@
     //self.navigationController.view.alpha = 1.0;
     [self  configBackInfo];
 }
+
+#pragma mark - UIGuestureRecognizerDelegate
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    return YES;
+}
+
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    NSLog(@"afadfa");
+    _scrollViewDragging = YES;
+}
+
 @end
