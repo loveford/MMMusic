@@ -11,6 +11,7 @@
 #import "MusiciCarouselViewController.h"
 #import "GlobalDownloadMusic.h"
 #import "GlobalMusicPlayRow.h"
+#import "MusicPlayManager.h"
 
 @interface iPodPlayerViewController ()
 
@@ -276,8 +277,8 @@
   didPickMediaItems:(MPMediaItemCollection *)mediaItemCollection{
     
     BOOL isADD = NO;
-	NSMutableArray *tempArray = [[NSMutableArray alloc]initWithArray:[musicPlayerManager.mediaCollection items]];
-	
+//	NSMutableArray *tempArray = [[NSMutableArray alloc]initWithArray:[musicPlayerManager.mediaCollection items]];
+    NSMutableArray *tempArray = [[NSMutableArray alloc]initWithArray:[[MusicPlayManager shareMusicManager].iPodMediaCollection items]];
 	for(MPMediaItem *item in [mediaItemCollection items])
 	{
 		if([tempArray containsObject:item] == NO)//判断所选择音乐是否有添加过
@@ -288,10 +289,11 @@
 	}
 	if(isADD)
 	{
-		[musicPlayerManager stop];
-		[musicPlayerManager reload:tempArray];
-		[musicPlayerManager saveToData];
-		[musicListView reloadData];
+//		[musicPlayerManager stop];
+//		[musicPlayerManager reload:tempArray];
+//		[musicPlayerManager saveToData];
+//		[musicListView reloadData];
+        [[MusicPlayManager shareMusicManager] saveToData];
 	}
 	tempArray = nil;
 	[mediaPicker dismissModalViewControllerAnimated: YES];//释放选择器         

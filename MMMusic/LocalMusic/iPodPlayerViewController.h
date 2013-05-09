@@ -11,8 +11,6 @@
 #import "SVProgressHUD.h"               //指示器
 #import "IPodMusicPlayerManager.h"
 
-
-
 @interface iPodPlayerViewController : UITableViewController<MPMediaPickerControllerDelegate>{
     IPodMusicPlayerManager      *musicPlayerManager;    //音乐播放器
 }

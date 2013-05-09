@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2ABD0B1A173BA07D007065A8 /* MusicPlayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ABD0B19173BA07D007065A8 /* MusicPlayManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		2AD2F1AF1738E39E00343560 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AD2F1AE1738E39E00343560 /* UIKit.framework */; };
 		2AD2F1B11738E39E00343560 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AD2F1B01738E39E00343560 /* Foundation.framework */; };
 		2AD2F1B31738E39E00343560 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AD2F1B21738E39E00343560 /* CoreGraphics.framework */; };
@@ -130,9 +131,12 @@
 		2AD2F30C1738EC4D00343560 /* btnEffect.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2AD2F2D21738EC4D00343560 /* btnEffect.wav */; };
 		2AD2F30D1738EC4D00343560 /* download-complete.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2AD2F2D31738EC4D00343560 /* download-complete.wav */; };
 		2AD2F3141738EE0500343560 /* SliderNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD2F3131738EE0400343560 /* SliderNavigationController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		2AE5E82B173B5090000B5CDC /* MusicPlayingViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE5E82A173B5090000B5CDC /* MusicPlayingViewCtrl.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2ABD0B18173BA07D007065A8 /* MusicPlayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicPlayManager.h; sourceTree = "<group>"; };
+		2ABD0B19173BA07D007065A8 /* MusicPlayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MusicPlayManager.m; sourceTree = "<group>"; };
 		2AD2F1AA1738E39E00343560 /* MMMusic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MMMusic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AD2F1AE1738E39E00343560 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2AD2F1B01738E39E00343560 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -304,6 +308,8 @@
 		2AD2F2D31738EC4D00343560 /* download-complete.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "download-complete.wav"; sourceTree = "<group>"; };
 		2AD2F3121738EE0400343560 /* SliderNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SliderNavigationController.h; sourceTree = "<group>"; };
 		2AD2F3131738EE0400343560 /* SliderNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SliderNavigationController.m; sourceTree = "<group>"; };
+		2AE5E829173B5090000B5CDC /* MusicPlayingViewCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MusicPlayingViewCtrl.h; path = MusicPlayingViewCtrl/MusicPlayingViewCtrl.h; sourceTree = "<group>"; };
+		2AE5E82A173B5090000B5CDC /* MusicPlayingViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MusicPlayingViewCtrl.m; path = MusicPlayingViewCtrl/MusicPlayingViewCtrl.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -370,6 +376,9 @@
 			children = (
 				2AD2F1BD1738E39E00343560 /* AppDelegate.h */,
 				2AD2F1BE1738E39E00343560 /* AppDelegate.m */,
+				2ABD0B18173BA07D007065A8 /* MusicPlayManager.h */,
+				2ABD0B19173BA07D007065A8 /* MusicPlayManager.m */,
+				2AE5E82D173B5095000B5CDC /* MusicPlayingViewCtrl */,
 				2AD2F2501738E85000343560 /* OnlineMusic */,
 				2AD2F1DC1738E3B900343560 /* LocalMusic */,
 				2AD2F1F21738E3B900343560 /* Model */,
@@ -425,16 +434,16 @@
 			children = (
 				2AD2F3121738EE0400343560 /* SliderNavigationController.h */,
 				2AD2F3131738EE0400343560 /* SliderNavigationController.m */,
+				2AD2F1F61738E3B900343560 /* GDIInfinitePageScrollViewController.h */,
+				2AD2F1F71738E3B900343560 /* GDIInfinitePageScrollViewController.m */,
+				2AD2F1F81738E3B900343560 /* IPodMusicPlayerManager.h */,
+				2AD2F1F91738E3B900343560 /* IPodMusicPlayerManager.m */,
 				2AD2F27F1738E96B00343560 /* AudioStreamer */,
 				2AD2F26D1738E8ED00343560 /* RoundProgress */,
 				2AD2F2691738E89B00343560 /* Reachability */,
 				2AD2F2331738E7D100343560 /* ASIHttpRequest */,
 				2AD2F21C1738E73B00343560 /* MusicDownload */,
 				2AD2F1F31738E3B900343560 /* Carousel */,
-				2AD2F1F61738E3B900343560 /* GDIInfinitePageScrollViewController.h */,
-				2AD2F1F71738E3B900343560 /* GDIInfinitePageScrollViewController.m */,
-				2AD2F1F81738E3B900343560 /* IPodMusicPlayerManager.h */,
-				2AD2F1F91738E3B900343560 /* IPodMusicPlayerManager.m */,
 				2AD2F1FA1738E3B900343560 /* Lrc */,
 				2AD2F2011738E3B900343560 /* SVProgressHUD */,
 			);
@@ -658,6 +667,15 @@
 			path = Sounds;
 			sourceTree = "<group>";
 		};
+		2AE5E82D173B5095000B5CDC /* MusicPlayingViewCtrl */ = {
+			isa = PBXGroup;
+			children = (
+				2AE5E829173B5090000B5CDC /* MusicPlayingViewCtrl.h */,
+				2AE5E82A173B5090000B5CDC /* MusicPlayingViewCtrl.m */,
+			);
+			name = MusicPlayingViewCtrl;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -830,6 +848,8 @@
 				2AD2F2871738E96C00343560 /* LevelMeterView.m in Sources */,
 				2AD2F2881738E96C00343560 /* UIDevice+Hardware.m in Sources */,
 				2AD2F3141738EE0500343560 /* SliderNavigationController.m in Sources */,
+				2AE5E82B173B5090000B5CDC /* MusicPlayingViewCtrl.m in Sources */,
+				2ABD0B1A173BA07D007065A8 /* MusicPlayManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -948,6 +968,7 @@
 				2AD2F1DB1738E39E00343560 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
