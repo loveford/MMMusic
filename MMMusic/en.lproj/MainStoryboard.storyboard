@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="11G63b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2843" systemVersion="11G63b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1929"/>
     </dependencies>
     <scenes>
         <!--My Music List View Controller - 我的列表-->
@@ -119,9 +119,6 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
-                                <connections>
-                                    <segue destination="C3g-sX-8Um" kind="push" identifier="ipodMusic" id="Caa-gb-jGb"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -133,13 +130,11 @@
                         <barButtonItem key="rightBarButtonItem" title="正在播放" id="tSe-Rv-tpL">
                             <connections>
                                 <action selector="refresh:" destination="fzC-3e-CHz" id="K4H-Kf-aN3"/>
-                                <segue destination="C3g-sX-8Um" kind="push" id="dEm-0u-vJ7"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="musicListView" destination="jma-ES-btn" id="YRq-YY-de0"/>
-                        <segue destination="C3g-sX-8Um" kind="push" id="yhB-Gc-Wb0"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dmR-T6-9kX" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -389,7 +384,7 @@
             <objects>
                 <viewController storyboardIdentifier="j" id="C3g-sX-8Um" customClass="MusiciCarouselViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VCc-tI-gzC">
-                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="scaleAspectFill" image="blueSea.jpg" id="97O-FU-D5r">
@@ -415,7 +410,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </slider>
                             <view contentMode="scaleToFill" id="t8q-P9-S1q" customClass="iCarousel">
-                                <rect key="frame" x="0.0" y="-49" width="320" height="457"/>
+                                <rect key="frame" x="0.0" y="-49" width="320" height="541"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="歌名-歌手" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="OhU-Db-Vzo">
@@ -477,12 +472,74 @@
         <image name="MusicLibrary.png" width="17" height="29"/>
         <image name="blueSea.jpg" width="1024" height="768"/>
     </resources>
+    <classes>
+        <class className="IPodMusicPlayerManager" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/IPodMusicPlayerManager.h"/>
+            <relationships>
+                <relationship kind="action" name="addGrouping:"/>
+                <relationship kind="action" name="managerPlayer:"/>
+                <relationship kind="action" name="playMode:"/>
+                <relationship kind="action" name="skipToNextItem:"/>
+                <relationship kind="action" name="skipToPreviousItem:"/>
+                <relationship kind="outlet" name="duration" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="imageAddGrouping" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="imageplayMode" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="playOrPause" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="playOrPauseInfo" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="singerName" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="sliderPlay" candidateClass="UISlider"/>
+                <relationship kind="outlet" name="songTitle" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="totaltime" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="MusicDownloadViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MusicDownloadViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="downloading:"/>
+                <relationship kind="outlet" name="downloadingTitle" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="musicDownloadingTable" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="musicFinishedTable" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="MusiciCarouselViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MusiciCarouselViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="hearts:"/>
+                <relationship kind="outlet" name="carousel" candidateClass="iCarousel"/>
+                <relationship kind="outlet" name="duration" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lalbumTitle" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lselectalbumTitle" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="sliderPlay" candidateClass="UISlider"/>
+                <relationship kind="outlet" name="totaltime" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="MyMusicListViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MyMusicListViewController.h"/>
+        </class>
+        <class className="SliderNavigationController" superclassName="UINavigationController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SliderNavigationController.h"/>
+        </class>
+        <class className="iCarousel" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/iCarousel.h"/>
+            <relationships>
+                <relationship kind="outlet" name="dataSource"/>
+                <relationship kind="outlet" name="delegate"/>
+            </relationships>
+        </class>
+        <class className="iPodMusicListViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/iPodMusicListViewController.h"/>
+        </class>
+        <class className="iPodPlayerViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/iPodPlayerViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="refresh:"/>
+                <relationship kind="outlet" name="musicListView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
-    <inferredMetricsTieBreakers>
-        <segue reference="Caa-gb-jGb"/>
-    </inferredMetricsTieBreakers>
 </document>

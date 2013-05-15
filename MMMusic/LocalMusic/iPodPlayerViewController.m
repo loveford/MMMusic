@@ -11,7 +11,8 @@
 #import "MusiciCarouselViewController.h"
 #import "GlobalDownloadMusic.h"
 #import "GlobalMusicPlayRow.h"
-#import "MusicPlayManager.h"
+#import "MusicPlayerManager.h"
+#import "MusicItem.h"
 
 @interface iPodPlayerViewController ()
 
@@ -112,8 +113,8 @@
 //方法功能：返回每组中保护的行数量
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if ([musicPlayerManager.mediaCollection count] > 0) {
-        return [musicPlayerManager.mediaCollection count] + 1;
+    if ([[MusicPlayerManager shareMusicManager].musicList count] > 0) {
+        return [[MusicPlayerManager shareMusicManager].musicList count] + 1;
     }else {
         return 1;
     }
@@ -157,8 +158,8 @@
         
         UILabel *musicNmae = (UILabel *)[cell viewWithTag:221];
         musicNmae.textAlignment = UITextAlignmentLeft;
-        musicNmae.text = [[[musicPlayerManager.mediaCollection items]objectAtIndex:indexPath.row -1]valueForProperty:MPMediaItemPropertyTitle];
-        
+        MusicItem *item = [[MusicPlayerManager shareMusicManager].musicList objectAtIndex:indexPath.row -1];
+        musicNmae.text = item.name;
         UILabel *symbol = (UILabel *)[cell viewWithTag:222];
         symbol.text = @"";
     }
@@ -181,20 +182,9 @@
     }
     else 
     {
-        if (musicPlayerManager.musicPlayer.playbackState == MPMoviePlaybackStatePlaying) 
-        {
-            [musicPlayerManager pause];
-        }
-        [musicPlayerManager.musicPlayer setNowPlayingItem:[[musicPlayerManager.mediaCollection items]objectAtIndex:indexPath.row - 1]];
-        
-        if ([[GlobalMusicList sharedSingleton].GmediaItemCList count] > 0) 
-        {
-            [GlobalMusicList sharedSingleton].GmediaItemCList = nil;
-            [GlobalMusicList sharedSingleton].GNSMusicListName = @"";
-        }
-        [GlobalMusicList sharedSingleton].GmediaItemCList = musicPlayerManager.mediaCollection;
-        [GlobalMusicList sharedSingleton].GNSMusicListName = self.musicListName;  
-        [musicPlayerManager.musicPlayer play];   
+        MusicItem *item = [[MusicPlayerManager shareMusicManager].musicList objectAtIndex:indexPath.row-1];
+        [[MusicPlayerManager shareMusicManager] loadMusic:item];
+        [[MusicPlayerManager shareMusicManager] play];
         
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
     }
@@ -278,12 +268,24 @@
     
     BOOL isADD = NO;
 //	NSMutableArray *tempArray = [[NSMutableArray alloc]initWithArray:[musicPlayerManager.mediaCollection items]];
-    NSMutableArray *tempArray = [[NSMutableArray alloc]initWithArray:[[MusicPlayManager shareMusicManager].iPodMediaCollection items]];
+    NSMutableArray *tempArray = [[NSMutableArray alloc]initWithArray:[MusicPlayerManager shareMusicManager].musicList];
 	for(MPMediaItem *item in [mediaItemCollection items])
 	{
-		if([tempArray containsObject:item] == NO)//判断所选择音乐是否有添加过
+        MusicItem *musicItem = [[MusicItem alloc] init];
+        NSString *url = [[item valueForProperty:MPMediaItemPropertyAssetURL] description];
+        NSArray *tmpArray = [url componentsSeparatedByString:@"id="];
+        NSString *musicId = [tmpArray lastObject];
+        musicId = [musicId stringByReplacingOccurrencesOfString:@"-" withString:@""];
+        musicItem.url = [NSURL fileURLWithPath:[[NSString stringWithFormat:@"%@/%@.mp4",[[MusicPlayerManager shareMusicManager] getMusicDocument],musicId] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+//        musicItem.url = [item valueForProperty:MPMediaItemPropertyAssetURL];
+        musicItem.name = [item valueForProperty:MPMediaItemPropertyTitle];
+        musicItem.lyrics = [item valueForProperty:MPMediaItemPropertyLyrics];
+        musicItem.isIPodMusic = YES;
+        
+		if([tempArray containsObject:musicItem] == NO)//判断所选择音乐是否有添加过
 		{
-			[tempArray addObject:item];
+			[tempArray addObject:musicItem];
+            [[MusicPlayerManager shareMusicManager] exportMP3:[item valueForProperty:MPMediaItemPropertyAssetURL] toFileUrl:[NSString stringWithFormat:@"%@/%@.mp4",[[MusicPlayerManager shareMusicManager] getMusicDocument],musicId]];
 			isADD = YES;
 		}
 	}
@@ -293,10 +295,13 @@
 //		[musicPlayerManager reload:tempArray];
 //		[musicPlayerManager saveToData];
 //		[musicListView reloadData];
-        [[MusicPlayManager shareMusicManager] saveToData];
+        [MusicPlayerManager shareMusicManager].musicList = [NSMutableArray arrayWithArray:tempArray];
+        [[MusicPlayerManager shareMusicManager] saveToData];
 	}
 	tempArray = nil;
-	[mediaPicker dismissModalViewControllerAnimated: YES];//释放选择器         
+	[mediaPicker dismissModalViewControllerAnimated: YES];//释放选择器
+    NSLog(@"%d", [MusicPlayerManager shareMusicManager].musicList.count);
+    [self.tableView reloadData];
 //    [self performSegueWithIdentifier:@"musicPlayer" sender:self];  //跳转播放页面
 }
 //方法类型：系统方法 

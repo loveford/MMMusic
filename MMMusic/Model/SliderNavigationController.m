@@ -187,7 +187,7 @@
     if ([view isKindOfClass:[UITableView class]]) {
         for (UIGestureRecognizer*ges in self.currentView.gestureRecognizers)
         {
-            NSLog(@"ges info = %@",[ges class]);
+//            NSLog(@"ges info = %@",[ges class]);
 //            优先相应view的滑动
             if ([NSStringFromClass([ges class]) isEqualToString:@"UISwipeGestureRecognizer"])
             {
