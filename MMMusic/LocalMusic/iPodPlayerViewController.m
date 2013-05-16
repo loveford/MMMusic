@@ -276,7 +276,7 @@
         NSArray *tmpArray = [url componentsSeparatedByString:@"id="];
         NSString *musicId = [tmpArray lastObject];
         musicId = [musicId stringByReplacingOccurrencesOfString:@"-" withString:@""];
-        musicItem.url = [NSURL fileURLWithPath:[[NSString stringWithFormat:@"%@/%@.mp4",[[MusicPlayerManager shareMusicManager] getMusicDocument],musicId] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        musicItem.url = [NSURL fileURLWithPath:[[NSString stringWithFormat:@"%@/%@.3gp",[[MusicPlayerManager shareMusicManager] getMusicDocument],musicId] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
 //        musicItem.url = [item valueForProperty:MPMediaItemPropertyAssetURL];
         musicItem.name = [item valueForProperty:MPMediaItemPropertyTitle];
         musicItem.lyrics = [item valueForProperty:MPMediaItemPropertyLyrics];
@@ -285,7 +285,7 @@
 		if([tempArray containsObject:musicItem] == NO)//判断所选择音乐是否有添加过
 		{
 			[tempArray addObject:musicItem];
-            [[MusicPlayerManager shareMusicManager] exportMP3:[item valueForProperty:MPMediaItemPropertyAssetURL] toFileUrl:[NSString stringWithFormat:@"%@/%@.mp4",[[MusicPlayerManager shareMusicManager] getMusicDocument],musicId]];
+            [[MusicPlayerManager shareMusicManager] exportMP3:[item valueForProperty:MPMediaItemPropertyAssetURL] toFileUrl:[NSString stringWithFormat:@"%@/%@.3gp",[[MusicPlayerManager shareMusicManager] getMusicDocument],musicId]];
 			isADD = YES;
 		}
 	}

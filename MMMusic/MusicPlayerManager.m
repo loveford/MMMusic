@@ -142,6 +142,7 @@ static MusicPlayerManager *_musicManager;
 
 -(void)loadMusic:(MusicItem*)musicItem
 {
+    _songIndex = [self.musicList indexOfObject:musicItem];
     NSError *error;
     self.musicPlayer= [[[AVAudioPlayer alloc] initWithContentsOfURL:musicItem.url error:&error] autorelease];
     _musicPlayer.delegate=self;
@@ -153,6 +154,9 @@ static MusicPlayerManager *_musicManager;
 //    self.musicPlayer = [[AVAudioPlayer alloc] initWithData:songFile error:&error];
     _musicPlayer.volume= 0.5;
     [_musicPlayer prepareToPlay];
+    if (!self.musicPlayer && self.musicList.count) {
+        [self next];
+    }
 }
 
 //播放完成自动切换
@@ -270,21 +274,20 @@ static MusicPlayerManager *_musicManager;
 #pragma mark - Copy the Songs From iPod Library
 -(void)exportMP3:(NSURL*)url toFileUrl:(NSString*)fileURL
 {
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    if ([fileManager fileExistsAtPath:fileURL]) {
-        return;
-    }
+   
     
     AVURLAsset *songAsset = [AVURLAsset URLAssetWithURL: url options:nil];
     
     AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset: songAsset
                                                                       presetName: AVAssetExportPresetPassthrough];
     
-    exporter.outputFileType = @"public.mpeg-4";
-    
+    exporter.outputFileType = @"public.3gpp";
 //    NSString *exportFile = [[self getMusicDocument] stringByAppendingPathComponent:
 //                            @"exported.mp4"];
-    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if ([fileManager fileExistsAtPath:fileURL]) {
+        return;
+    }
     NSURL *exportURL = [NSURL fileURLWithPath:fileURL];
     exporter.outputURL = exportURL;
     
