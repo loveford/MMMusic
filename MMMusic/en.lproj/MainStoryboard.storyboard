@@ -9,7 +9,7 @@
             <objects>
                 <tableViewController id="NNy-SR-b5S" customClass="MyMusicListViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="77" sectionHeaderHeight="22" sectionFooterHeight="22" id="wgb-KA-iuB">
-                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -49,7 +49,7 @@
             <objects>
                 <navigationController definesPresentationContext="YES" id="CqK-nf-G8d" customClass="SliderNavigationController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="iPod" image="MusicLibrary.png" id="f25-TZ-v8u"/>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="npE-je-meV">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -84,7 +84,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="" id="fzC-3e-CHz" customClass="iPodPlayerViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="53" sectionHeaderHeight="22" sectionFooterHeight="22" id="jma-ES-btn">
-                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -174,7 +174,7 @@
             <objects>
                 <viewController storyboardIdentifier="iPodPlayer" id="20E-YD-ir0" customClass="IPodMusicPlayerManager" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fL7-Rb-zwE">
-                        <rect key="frame" x="0.0" y="20" width="320" height="499"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" image="blueSea.jpg" id="McC-4w-ael">
@@ -205,7 +205,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" alpha="0.69999998807907104" contentMode="scaleToFill" id="KVM-6W-NGy">
-                                <rect key="frame" x="0.0" y="453" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="502" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem style="plain" id="TlN-zS-RQ9">

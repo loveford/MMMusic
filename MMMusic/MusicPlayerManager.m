@@ -108,6 +108,9 @@ static MusicPlayerManager *_musicManager;
 - (void)loadMusicList
 {
     NSString *tempStorage ;
+    if (self.StorageMusicName == nil) {
+        self.StorageMusicName = @"mrlb";
+    }
     if (self.StorageMusicName == @"mrlb")
     {
         tempStorage = [NSString stringWithFormat:@"%@",self.StorageMusicName];
@@ -146,12 +149,6 @@ static MusicPlayerManager *_musicManager;
     NSError *error;
     self.musicPlayer= [[[AVAudioPlayer alloc] initWithContentsOfURL:musicItem.url error:&error] autorelease];
     _musicPlayer.delegate=self;
-//    NSData *songFile = [[NSData alloc] initWithContentsOfURL:musicItem.url options:NSDataReadingMappedIfSafe error:nil ];
-//    
-//    
-//    
-//
-//    self.musicPlayer = [[AVAudioPlayer alloc] initWithData:songFile error:&error];
     _musicPlayer.volume= 0.5;
     [_musicPlayer prepareToPlay];
     if (!self.musicPlayer && self.musicList.count) {
@@ -275,7 +272,10 @@ static MusicPlayerManager *_musicManager;
 -(void)exportMP3:(NSURL*)url toFileUrl:(NSString*)fileURL
 {
    
-    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if ([fileManager fileExistsAtPath:fileURL]) {
+        return;
+    }
     AVURLAsset *songAsset = [AVURLAsset URLAssetWithURL: url options:nil];
     
     AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset: songAsset
@@ -284,10 +284,7 @@ static MusicPlayerManager *_musicManager;
     exporter.outputFileType = @"public.3gpp";
 //    NSString *exportFile = [[self getMusicDocument] stringByAppendingPathComponent:
 //                            @"exported.mp4"];
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    if ([fileManager fileExistsAtPath:fileURL]) {
-        return;
-    }
+    
     NSURL *exportURL = [NSURL fileURLWithPath:fileURL];
     exporter.outputURL = exportURL;
     

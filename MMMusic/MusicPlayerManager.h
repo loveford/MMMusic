@@ -23,4 +23,5 @@
 -(void)previous;
 - (NSString *)getMusicDocument;
 -(void)exportMP3:(NSURL*)url toFileUrl:(NSString*)fileURL;
+- (void)loadMusicList;
 @end

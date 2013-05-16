@@ -84,7 +84,7 @@
         } completion:^(BOOL finished) {
             
         }];
-        
+        viewController.hidesBottomBarWhenPushed = YES;
     }
     [super pushViewController:viewController animated:NO];
 }

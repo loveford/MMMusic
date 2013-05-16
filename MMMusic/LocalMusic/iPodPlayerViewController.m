@@ -252,11 +252,12 @@
 //方法功能：判断是否有存储过的音乐
 - (void)initialMusicList
 {
-	if([[NSUserDefaults standardUserDefaults]objectForKey:musicListName])
-    {
-        [musicPlayerManager reload:[NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults]objectForKey:musicListName]]];
-    }
-	[musicListView reloadData];
+    [[MusicPlayerManager shareMusicManager] loadMusicList];
+//	if([[NSUserDefaults standardUserDefaults]objectForKey:musicListName])
+//    {
+//        [musicPlayerManager reload:[NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults]objectForKey:musicListName]]];
+//    }
+//	[musicListView reloadData];
 }
 
 
@@ -296,6 +297,7 @@
 //		[musicPlayerManager saveToData];
 //		[musicListView reloadData];
         [MusicPlayerManager shareMusicManager].musicList = [NSMutableArray arrayWithArray:tempArray];
+        [MusicPlayerManager shareMusicManager].StorageMusicName = @"mrlb";
         [[MusicPlayerManager shareMusicManager] saveToData];
 	}
 	tempArray = nil;
